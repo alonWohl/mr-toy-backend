@@ -35,8 +35,8 @@ function query(filterBy = {}) {
 			}
 		})
 	}
-	const { pageIdx } = filterBy
-	if (pageIdx !== undefined) {
+
+	if (filterBy.pageIdx !== undefined) {
 		let startIdx = +pageIdx * PAGE_SIZE
 		filteredToys = filteredToys.slice(startIdx, startIdx + PAGE_SIZE)
 	}
