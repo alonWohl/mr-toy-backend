@@ -6,7 +6,7 @@ const toys = utilService.readJsonFile('data/toy.json')
 
 export const toyService = {
 	query,
-	get,
+	getById,
 	remove,
 	save
 }
@@ -52,9 +52,10 @@ function query(filterBy = {}) {
 	return Promise.resolve({ toys: filteredToys, chartsData, total })
 }
 
-function get(toyId) {
-	const toy = toys.find(toy => toy._id === toyId)
+function getById(toyId) {
+	let toy = toys.find(toy => toy._id === toyId)
 	if (!toy) return Promise.reject('Toy not found')
+	toy = _setNextPrevToyId(toy)
 	return Promise.resolve(toy)
 }
 
@@ -145,4 +146,16 @@ function _generateMonthlySalesData() {
 	const data = labels.map(() => Math.floor(Math.random() * 50) + 30)
 
 	return { labels, data }
+}
+
+function _setNextPrevToyId(toy) {
+	if (!toys.length) return toy
+
+	const toyIdx = toys.findIndex(currToy => currToy._id === toy._id)
+	const nextToy = toys[toyIdx + 1] ? toys[toyIdx + 1] : toys[0]
+	const prevToy = toys[toyIdx - 1] ? toys[toyIdx - 1] : toys[toys.length - 1]
+
+	toy.nextToyId = nextToy._id
+	toy.prevToyId = prevToy._id
+	return toy
 }
