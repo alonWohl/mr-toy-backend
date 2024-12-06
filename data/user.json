@@ -1,17 +1,17 @@
 [
-	{
-		"username": "admin",
-		"password": "admin",
-		"fullname": "admin",
-		"isAdmin": true,
-		"score": 10000,
-		"_id": "eY7rv"
-	},
-	{
-		"username": "cc",
-		"password": "cc",
-		"fullname": "cc",
-		"score": 10000,
-		"_id": "zUbN0"
-	}
+  {
+    "username": "admin",
+    "password": "admin",
+    "fullname": "admin",
+    "isAdmin": true,
+    "score": 10000,
+    "_id": "eY7rv"
+  },
+  {
+    "username": "cc",
+    "password": "cc",
+    "fullname": "cc",
+    "score": 9870,
+    "_id": "zUbN0"
+  }
 ]

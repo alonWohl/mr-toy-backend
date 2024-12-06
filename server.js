@@ -179,6 +179,8 @@ app.put('/api/user', (req, res) => {
 	const loggedinUser = userService.validateToken(req.cookies.loginToken)
 	if (!loggedinUser) return res.status(400).send('No logged in user')
 	const { diff } = req.body
+	console.log(diff)
+
 	if (loggedinUser.score + diff < 0) return res.status(400).send('No credit')
 	loggedinUser.score += diff
 	return userService.save(loggedinUser).then(user => {
