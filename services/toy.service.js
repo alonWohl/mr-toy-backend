@@ -36,11 +36,20 @@ function query(filterBy = {}) {
 		})
 	}
 
+	const chartsData = {
+		pricesByLabel: _getAveragePricesByLabel(toys),
+		inventoryByLabel: _getInventoryByLabel(toys),
+		monthlySales: _generateMonthlySalesData()
+	}
+
+	const total = filteredToys.length
+
 	if (filterBy.pageIdx !== undefined) {
-		let startIdx = +pageIdx * PAGE_SIZE
+		let startIdx = +filterBy.pageIdx * PAGE_SIZE
 		filteredToys = filteredToys.slice(startIdx, startIdx + PAGE_SIZE)
 	}
-	return Promise.resolve(filteredToys)
+
+	return Promise.resolve({ toys: filteredToys, chartsData, total })
 }
 
 function get(toyId) {
@@ -88,4 +97,52 @@ function _saveToysToFile() {
 			resolve()
 		})
 	})
+}
+
+function _getAveragePricesByLabel(toys) {
+	const labelTotals = {}
+	const labelCounts = {}
+
+	toys.forEach(toy => {
+		toy.labels.forEach(label => {
+			if (!labelTotals[label]) {
+				labelTotals[label] = 0
+				labelCounts[label] = 0
+			}
+			labelTotals[label] += toy.price
+			labelCounts[label]++
+		})
+	})
+
+	const labels = Object.keys(labelTotals)
+	const data = labels.map(label => Math.round(labelTotals[label] / labelCounts[label]))
+
+	return { labels, data }
+}
+
+function _getInventoryByLabel(toys) {
+	const labelStats = {}
+
+	toys.forEach(toy => {
+		toy.labels.forEach(label => {
+			if (!labelStats[label]) {
+				labelStats[label] = { total: 0, inStock: 0 }
+			}
+			labelStats[label].total++
+			if (toy.inStock) labelStats[label].inStock++
+		})
+	})
+
+	const labels = Object.keys(labelStats)
+	const data = labels.map(label => Math.round((labelStats[label].inStock / labelStats[label].total) * 100))
+
+	return { labels, data }
+}
+
+function _generateMonthlySalesData() {
+	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+	const labels = months.slice(0, 6)
+	const data = labels.map(() => Math.floor(Math.random() * 50) + 30)
+
+	return { labels, data }
 }

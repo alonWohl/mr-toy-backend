@@ -30,13 +30,15 @@ app.get('/api/toy', (req, res) => {
 	const filterBy = {
 		txt: req.query.txt || '',
 		inStock: req.query.inStock || null,
-		pageIdx: req.query.pageIdx ? +req.query.pageIdx : undefined,
+		pageIdx: +req.query.pageIdx,
 		labels: Array.isArray(req.query.labels) ? req.query.labels : [],
 		sortBy: {
 			type: sortBy.type || '',
-			desc: sortBy.desc || 1
+			desc: +sortBy.desc || 1
 		}
 	}
+
+	console.log(filterBy)
 
 	toyService
 		.query(filterBy)
