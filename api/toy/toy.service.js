@@ -34,7 +34,13 @@ async function query(filterBy = { txt: '' }) {
 		const collection = await dbService.getCollection('toy')
 		const toys = await collection.find(criteria).sort(sortOptions).toArray()
 
-		return toys
+		const chartsData = {
+			pricesByLabel: _getAveragePricesByLabel(toys),
+			inventoryByLabel: _getInventoryByLabel(toys),
+			monthlySales: _generateMonthlySalesData()
+		}
+
+		return { toys, chartsData }
 	} catch (err) {
 		loggerService.error('Failed to query toys:', err)
 		throw err
@@ -89,4 +95,52 @@ async function update(toy) {
 		loggerService.error(`cannot update toy ${toy._id}`, err)
 		throw err
 	}
+}
+
+function _getAveragePricesByLabel(toys) {
+	const labelTotals = {}
+	const labelCounts = {}
+
+	toys.forEach(toy => {
+		toy.labels.forEach(label => {
+			if (!labelTotals[label]) {
+				labelTotals[label] = 0
+				labelCounts[label] = 0
+			}
+			labelTotals[label] += toy.price
+			labelCounts[label]++
+		})
+	})
+
+	const labels = Object.keys(labelTotals)
+	const data = labels.map(label => Math.round(labelTotals[label] / labelCounts[label]))
+
+	return { labels, data }
+}
+
+function _getInventoryByLabel(toys) {
+	const labelStats = {}
+
+	toys.forEach(toy => {
+		toy.labels.forEach(label => {
+			if (!labelStats[label]) {
+				labelStats[label] = { total: 0, inStock: 0 }
+			}
+			labelStats[label].total++
+			if (toy.inStock) labelStats[label].inStock++
+		})
+	})
+
+	const labels = Object.keys(labelStats)
+	const data = labels.map(label => Math.round((labelStats[label].inStock / labelStats[label].total) * 100))
+
+	return { labels, data }
+}
+
+function _generateMonthlySalesData() {
+	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+	const labels = months.slice(0, 6)
+	const data = labels.map(() => Math.floor(Math.random() * 50) + 30)
+
+	return { labels, data }
 }
