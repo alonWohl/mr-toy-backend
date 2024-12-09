@@ -11,7 +11,7 @@ export const toyService = {
 	save
 }
 
-function query(filterBy = {}) {
+async function query(filterBy = {}) {
 	let filteredToys = toys
 	if (filterBy.txt) {
 		const regExp = new RegExp(filterBy.txt, 'i')
@@ -49,14 +49,14 @@ function query(filterBy = {}) {
 		filteredToys = filteredToys.slice(startIdx, startIdx + PAGE_SIZE)
 	}
 
-	return Promise.resolve({ toys: filteredToys, chartsData, total })
+	return { toys: filteredToys, chartsData, total }
 }
 
-function getById(toyId) {
+async function getById(toyId) {
 	let toy = toys.find(toy => toy._id === toyId)
 	if (!toy) return Promise.reject('Toy not found')
 	toy = _setNextPrevToyId(toy)
-	return Promise.resolve(toy)
+	return toy
 }
 
 function remove(toyId) {
