@@ -2,6 +2,8 @@ import { ObjectId } from 'mongodb'
 import { loggerService } from '../../services/logger.service.js'
 import { dbService } from '../../services/db.service.js'
 
+const PAGE_SIZE = 6
+
 export const toyService = {
 	query,
 	getById,
@@ -32,7 +34,12 @@ async function query(filterBy = { txt: '' }) {
 		}
 
 		const collection = await dbService.getCollection('toy')
-		const toys = await collection.find(criteria).sort(sortOptions).toArray()
+
+		const total = await collection.countDocuments(criteria)
+
+		const skipAmount = filterBy.pageIdx !== undefined ? filterBy.pageIdx * PAGE_SIZE : 0
+
+		const toys = await collection.find(criteria).sort(sortOptions).skip(skipAmount).limit(PAGE_SIZE).toArray()
 
 		const chartsData = {
 			pricesByLabel: _getAveragePricesByLabel(toys),
@@ -40,7 +47,7 @@ async function query(filterBy = { txt: '' }) {
 			monthlySales: _generateMonthlySalesData()
 		}
 
-		return { toys, chartsData }
+		return { toys, chartsData, total }
 	} catch (err) {
 		loggerService.error('Failed to query toys:', err)
 		throw err
