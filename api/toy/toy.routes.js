@@ -5,7 +5,7 @@ import { requireAdmin } from '../../middlewares/requireAuth.middleware.js'
 export const toyRoutes = express.Router()
 
 toyRoutes.get('/', getToys)
-toyRoutes.get('/:id', getToyById)
+toyRoutes.get('/:toyId', getToyById)
 toyRoutes.post('/', requireAdmin, addToy)
-toyRoutes.put('/:id', requireAdmin, updateToy)
-toyRoutes.delete('/:id', requireAdmin, removeToy)
+toyRoutes.put('/:toyId', requireAdmin, updateToy)
+toyRoutes.delete('/:toyId', requireAdmin, removeToy)

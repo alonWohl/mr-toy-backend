@@ -60,7 +60,7 @@ export async function updateToy(req, res) {
 	const { loggedinUser } = req
 	try {
 		const toy = {
-			_id: req.params.id,
+			_id: req.params.toyId,
 			name: req.body.name,
 			price: +req.body.price,
 			inStock: +req.body.inStock,
