@@ -20,8 +20,12 @@ async function query(filterBy = { txt: '' }) {
 			criteria.name = { $regex: filterBy.txt, $options: 'i' }
 		}
 
+		if (filterBy.maxPrice) {
+			criteria.price = { $lte: filterBy.maxPrice }
+		}
+
 		if (filterBy.inStock !== null) {
-			criteria.inStock = filterBy.inStock
+			criteria.inStock = JSON.parse(filterBy.inStock)
 		}
 		if (filterBy.labels && filterBy.labels.length) {
 			criteria.labels = { $in: filterBy.labels }

@@ -7,6 +7,7 @@ export async function getToys(req, res) {
 
 		const filterBy = {
 			txt: req.query.txt || '',
+			maxPrice: +req.query.maxPrice || 0,
 			inStock: req.query.inStock || null,
 			pageIdx: +req.query.pageIdx || undefined,
 			labels: req.query.labels || [],
