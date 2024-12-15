@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb'
 import { dbService } from '../../services/db.service.js'
 import { loggerService } from '../../services/logger.service.js'
 
@@ -62,20 +63,21 @@ async function remove(userId) {
 async function update(user) {
 	try {
 		const userToSave = {
-			_id: ObjectId.createFromHexString(user._id),
 			username: user.username,
 			fullname: user.fullname,
 			score: user.score
 		}
+
+		console.log(user._id)
+
 		const collection = await dbService.getCollection('user')
-		await collection.updateOne({ _id: userToSave._id }, { $set: userToSave })
-		return userToSave
+		await collection.updateOne({ _id: ObjectId.createFromHexString(user._id) }, { $set: userToSave })
+		return { ...userToSave, _id: user._id }
 	} catch (err) {
 		loggerService.error(`cannot update user ${user._id}`, err)
 		throw err
 	}
 }
-
 async function add(user) {
 	try {
 		const existUser = await getByUsername(user.username)
