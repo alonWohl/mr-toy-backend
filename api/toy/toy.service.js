@@ -33,7 +33,7 @@ async function query(filterBy = { txt: '' }) {
 
 		const sortOptions = {}
 		if (filterBy.sortBy?.type) {
-			const sortDirection = filterBy.sortBy.desc ? -1 : 1
+			const sortDirection = filterBy.sortBy.desc
 			sortOptions[filterBy.sortBy.type] = sortDirection
 		}
 
