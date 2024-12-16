@@ -11,6 +11,7 @@ export async function getToys(req, res) {
 			inStock: req.query.inStock || null,
 			pageIdx: +req.query.pageIdx || undefined,
 			labels: req.query.labels || [],
+
 			sortBy: {
 				type: sortBy.type || '',
 				desc: +sortBy.desc || 1

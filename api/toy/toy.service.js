@@ -14,37 +14,28 @@ export const toyService = {
 
 async function query(filterBy = { txt: '' }) {
 	try {
-		const criteria = {}
-
-		if (filterBy.txt) {
-			criteria.name = { $regex: filterBy.txt, $options: 'i' }
-		}
-
-		if (filterBy.maxPrice) {
-			criteria.price = { $lte: filterBy.maxPrice }
-		}
-
-		if (filterBy.inStock !== null) {
-			criteria.inStock = JSON.parse(filterBy.inStock)
-		}
-		if (filterBy.labels && filterBy.labels.length) {
-			criteria.labels = { $in: filterBy.labels }
-		}
+		const criteria = _buildCriteria(filterBy)
 
 		const sortOptions = {}
+
 		if (filterBy.sortBy?.type) {
 			const sortDirection = filterBy.sortBy.desc
 			sortOptions[filterBy.sortBy.type] = sortDirection
 		}
 
 		const collection = await dbService.getCollection('toy')
-
 		const total = await collection.countDocuments(criteria)
-
 		const skipAmount = filterBy.pageIdx !== undefined ? filterBy.pageIdx * PAGE_SIZE : 0
 
-		const toys = await collection.find(criteria).sort(sortOptions).skip(skipAmount).limit(PAGE_SIZE).toArray()
+		await collection.updateMany({}, [
+			{
+				$set: {
+					createdAt: { $toDate: '$_id' }
+				}
+			}
+		])
 
+		const toys = await collection.find(criteria).sort(sortOptions).skip(skipAmount).limit(PAGE_SIZE).toArray()
 		const chartsData = {
 			pricesByLabel: _getAveragePricesByLabel(toys),
 			inventoryByLabel: _getInventoryByLabel(toys),
@@ -154,4 +145,25 @@ function _generateMonthlySalesData() {
 	const data = labels.map(() => Math.floor(Math.random() * 50) + 30)
 
 	return { labels, data }
+}
+
+function _buildCriteria(filterBy) {
+	const criteria = {}
+
+	if (filterBy.txt) {
+		criteria.name = { $regex: filterBy.txt, $options: 'i' }
+	}
+
+	if (filterBy.maxPrice) {
+		criteria.price = { $lte: filterBy.maxPrice }
+	}
+
+	if (filterBy.inStock !== null) {
+		criteria.inStock = JSON.parse(filterBy.inStock)
+	}
+	if (filterBy.labels && filterBy.labels.length) {
+		criteria.labels = { $in: filterBy.labels }
+	}
+
+	return criteria
 }
