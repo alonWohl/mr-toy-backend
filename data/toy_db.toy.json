@@ -1,0 +1,313 @@
+[{
+  "_id": {
+    "$oid": "675a285921d7868327edcba1"
+  },
+  "name": "Science Chemistry Set",
+  "price": 45,
+  "labels": [
+    "Educational",
+    "Box game"
+  ],
+  "inStock": 0,
+  "createdAt": {
+    "$date": "2024-12-12T00:03:37.000Z"
+  },
+  "msgs": []
+},
+{
+  "_id": {
+    "$oid": "675a285921d7868327edcba4"
+  },
+  "name": "Paint and Easel Set",
+  "price": 40,
+  "labels": [
+    "Art",
+    "Educational"
+  ],
+  "inStock": false,
+  "createdAt": {
+    "$date": "2024-12-12T00:03:37.000Z"
+  },
+  "msgs": [
+    {
+      "txt": "Nice toy",
+      "by": {
+        "_id": "6760ad74f4fbde707968a48d",
+        "fullname": "muki"
+      },
+      "createdAt": 1734391487599,
+      "id": "CIds3o"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "675a285921d7868327edcba5"
+  },
+  "name": "Dinosaur Figure Collection",
+  "price": 35,
+  "labels": [
+    "Educational",
+    "Box game"
+  ],
+  "inStock": true,
+  "createdAt": {
+    "$date": "2024-12-12T00:03:37.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "675a285921d7868327edcba6"
+  },
+  "name": "Soccer Ball",
+  "price": 20,
+  "labels": [
+    "Outdoor",
+    "Sports"
+  ],
+  "inStock": true,
+  "createdAt": {
+    "$date": "2024-12-12T00:03:37.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "675a285921d7868327edcba7"
+  },
+  "name": "Interactive Globe",
+  "price": 50,
+  "labels": [
+    "Educational",
+    "Battery Powered"
+  ],
+  "inStock": true,
+  "createdAt": {
+    "$date": "2024-12-12T00:03:37.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "675a285921d7868327edcba8"
+  },
+  "name": "Princess Castle Tent",
+  "price": 65,
+  "labels": [
+    "Outdoor",
+    "Box game"
+  ],
+  "inStock": false,
+  "createdAt": {
+    "$date": "2024-12-12T00:03:37.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "675a285921d7868327edcba9"
+  },
+  "name": "Remote Control Drone",
+  "price": 120,
+  "labels": [
+    "Battery Powered",
+    "Outdoor"
+  ],
+  "inStock": true,
+  "createdAt": {
+    "$date": "2024-12-12T00:03:37.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "675a285921d7868327edcbaa"
+  },
+  "name": "Magic Kit",
+  "price": 30,
+  "labels": [
+    "Box game",
+    "Educational"
+  ],
+  "inStock": true,
+  "createdAt": {
+    "$date": "2024-12-12T00:03:37.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "675a285921d7868327edcbab"
+  },
+  "name": "Play Kitchen Set",
+  "price": 85,
+  "labels": [
+    "Box game",
+    "Educational"
+  ],
+  "inStock": true,
+  "createdAt": {
+    "$date": "2024-12-12T00:03:37.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "675a285921d7868327edcbac"
+  },
+  "name": "Wooden Train Set",
+  "price": 55,
+  "labels": [
+    "On wheels",
+    "Box game"
+  ],
+  "inStock": true,
+  "createdAt": {
+    "$date": "2024-12-12T00:03:37.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "675a285921d7868327edcbad"
+  },
+  "name": "Art Supply Kit",
+  "price": 45,
+  "labels": [
+    "Art",
+    "Educational"
+  ],
+  "inStock": false,
+  "createdAt": {
+    "$date": "2024-12-12T00:03:37.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "675a285921d7868327edcbae"
+  },
+  "name": "Baby Doll Stroller",
+  "price": 35,
+  "labels": [
+    "Doll",
+    "On wheels"
+  ],
+  "inStock": true,
+  "createdAt": {
+    "$date": "2024-12-12T00:03:37.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "675a285921d7868327edcbaf"
+  },
+  "name": "Musical Guitar",
+  "price": 40,
+  "labels": [
+    "Musical",
+    "Battery Powered"
+  ],
+  "inStock": true,
+  "createdAt": {
+    "$date": "2024-12-12T00:03:37.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "675a285921d7868327edcbb0"
+  },
+  "name": "Basketball Hoop",
+  "price": 70,
+  "labels": [
+    "Outdoor",
+    "Sports"
+  ],
+  "inStock": true,
+  "createdAt": {
+    "$date": "2024-12-12T00:03:37.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "675a285921d7868327edcbb1"
+  },
+  "name": "Remote Control Boat",
+  "price": 90,
+  "labels": [
+    "Battery Powered",
+    "Outdoor"
+  ],
+  "inStock": false,
+  "createdAt": {
+    "$date": "2024-12-12T00:03:37.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "675a285921d7868327edcbb2"
+  },
+  "name": "Doctor Play Set",
+  "price": 25,
+  "labels": [
+    "Educational",
+    "Box game"
+  ],
+  "inStock": true,
+  "createdAt": {
+    "$date": "2024-12-12T00:03:37.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "675a285921d7868327edcbb3"
+  },
+  "name": "Building Construction Set",
+  "price": 60,
+  "labels": [
+    "Educational",
+    "Box game"
+  ],
+  "inStock": true,
+  "createdAt": {
+    "$date": "2024-12-12T00:03:37.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "675a285921d7868327edcbb4"
+  },
+  "name": "Garden Tool Set",
+  "price": 30,
+  "labels": [
+    "Outdoor",
+    "Educational"
+  ],
+  "inStock": true,
+  "createdAt": {
+    "$date": "2024-12-12T00:03:37.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "675a3430ee067f113c3dfdd8"
+  },
+  "name": "Gogo",
+  "price": 15,
+  "inStock": 1,
+  "labels": [
+    "Educational",
+    "Box game"
+  ],
+  "owner": null,
+  "createdAt": {
+    "$date": "2024-12-12T00:54:08.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "675f5710d9811caf18d01e11"
+  },
+  "name": "Pikachu doll",
+  "price": 20,
+  "inStock": 1,
+  "labels": [
+    "Doll"
+  ],
+  "owner": null,
+  "createdAt": {
+    "$date": "2024-12-15T22:24:16.000Z"
+  }
+}]

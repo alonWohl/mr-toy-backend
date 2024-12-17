@@ -1,0 +1,28 @@
+[{
+  "_id": {
+    "$oid": "675a331bee067f113c3dfdd7"
+  },
+  "username": "admin",
+  "password": "$2b$10$7YJxAf3VUkK5bjjdEZ4orOqKrlbLUh0mBKj/kuDk2P6.eSritoZci",
+  "fullname": "admin",
+  "score": 1000,
+  "isAdmin": true
+},
+{
+  "_id": {
+    "$oid": "6760ad74f4fbde707968a48d"
+  },
+  "username": "muki",
+  "password": "$2b$10$krAy/RtLQCP8lfBD2HsB6OYMSO/XkTcd5pBu.5jtypCAzUnMKGf2O",
+  "fullname": "muki",
+  "score": 0
+},
+{
+  "_id": {
+    "$oid": "6760c22e41823df8d7318495"
+  },
+  "username": "alon",
+  "password": "$2b$10$fFri8YvYQion4rAr2uBG7OHmf6y8wF05eqVZCxPqymJrYMvykx3C2",
+  "fullname": "alon wohl",
+  "score": 1000
+}]
