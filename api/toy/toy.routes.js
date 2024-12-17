@@ -1,6 +1,6 @@
 import express from 'express'
-import { addToy, getToyById, getToys, removeToy, updateToy } from './toy.controller.js'
-import { requireAdmin } from '../../middlewares/requireAuth.middleware.js'
+import { addMsg, addToy, getToyById, getToys, removeMsg, removeToy, updateToy } from './toy.controller.js'
+import { requireAdmin, requireAuth } from '../../middlewares/requireAuth.middleware.js'
 
 export const toyRoutes = express.Router()
 
@@ -9,3 +9,7 @@ toyRoutes.get('/:toyId', getToyById)
 toyRoutes.post('/', requireAdmin, addToy)
 toyRoutes.put('/:toyId', requireAdmin, updateToy)
 toyRoutes.delete('/:toyId', requireAdmin, removeToy)
+
+// MSG ///
+toyRoutes.post('/:toyId/msg', requireAuth, addMsg)
+toyRoutes.delete('/:toyId/msg/:msgId', requireAuth, removeMsg)

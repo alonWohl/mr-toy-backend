@@ -1,6 +1,7 @@
 import { ObjectId } from 'mongodb'
 import { loggerService } from '../../services/logger.service.js'
 import { dbService } from '../../services/db.service.js'
+import { utilService } from '../../../frontend/src/services/util.service.js'
 
 const PAGE_SIZE = 6
 
@@ -9,7 +10,9 @@ export const toyService = {
 	getById,
 	add,
 	update,
-	remove
+	remove,
+	addMsg,
+	removeMsg
 }
 
 async function query(filterBy = { txt: '' }) {
@@ -95,6 +98,29 @@ async function update(toy) {
 		collection.updateOne({ _id: ObjectId.createFromHexString(toy._id) }, { $set: toyToSave })
 	} catch (err) {
 		loggerService.error(`cannot update toy ${toy._id}`, err)
+		throw err
+	}
+}
+
+async function addMsg(toyId, msg) {
+	try {
+		msg.id = utilService.makeId()
+		const collection = await dbService.getCollection('toy')
+		await collection.updateOne({ _id: ObjectId.createFromHexString(toyId) }, { $push: { msgs: msg } })
+		return msg
+	} catch (err) {
+		loggerService.error(`cannot add toy msg ${toyId}`, err)
+		throw err
+	}
+}
+
+async function removeMsg(toyId, msgId) {
+	try {
+		const collection = await dbService.getCollection('toy')
+		await collection.updateOne({ _id: ObjectId.createFromHexString(toyId) }, { $pull: { msgs: { id: msgId } } })
+		return msgId
+	} catch (err) {
+		loggerService.error(`cannot remove msg ${toyId}`, err)
 		throw err
 	}
 }

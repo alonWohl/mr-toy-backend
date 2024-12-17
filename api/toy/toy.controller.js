@@ -88,3 +88,33 @@ export async function removeToy(req, res) {
 		res.status(400).send('Cannot remove toy')
 	}
 }
+
+export async function addMsg(req, res) {
+	const { loggedinUser } = req
+
+	try {
+		const msg = {
+			txt: req.body.txt,
+			by: loggedinUser,
+			createdAt: Date.now()
+		}
+
+		const { toyId } = req.params
+		const savedMsg = await toyService.addMsg(toyId, msg)
+		res.send(savedMsg)
+	} catch (err) {
+		loggerService.error('Failed to add toy msg', err)
+		res.status(500).send('Failed to add  toy msg')
+	}
+}
+
+export async function removeMsg(req, res) {
+	try {
+		const { toyId, msgId } = req.params
+		const removedId = await toyService.removeMsg(toyId, msgId)
+		res.send(removedId)
+	} catch (err) {
+		loggerService.error('Failed to remove toy msg', err)
+		res.status(500).send('Failed to remove toy msg ')
+	}
+}

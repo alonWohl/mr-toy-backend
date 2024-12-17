@@ -33,7 +33,7 @@ async function signup(username, password, fullname) {
 	if (!username || !password || !fullname) throw new Error('Missing details')
 
 	const hash = await bcrypt.hash(password, saltRounds)
-	return userService.add({ username, password: hash, fullname })
+	return userService.add({ username, password: hash, fullname, score: 1000 })
 }
 
 function getLoginToken(user) {
