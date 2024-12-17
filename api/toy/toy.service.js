@@ -1,7 +1,6 @@
 import { ObjectId } from 'mongodb'
 import { loggerService } from '../../services/logger.service.js'
 import { dbService } from '../../services/db.service.js'
-import { utilService } from '../../../frontend/src/services/util.service.js'
 
 const PAGE_SIZE = 6
 
@@ -104,7 +103,7 @@ async function update(toy) {
 
 async function addMsg(toyId, msg) {
 	try {
-		msg.id = utilService.makeId()
+		msg.id = _makeId()
 		const collection = await dbService.getCollection('toy')
 		await collection.updateOne({ _id: ObjectId.createFromHexString(toyId) }, { $push: { msgs: msg } })
 		return msg
@@ -192,4 +191,15 @@ function _buildCriteria(filterBy) {
 	}
 
 	return criteria
+}
+
+function _makeId(length = 6) {
+	var txt = ''
+	var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+	for (var i = 0; i < length; i++) {
+		txt += possible.charAt(Math.floor(Math.random() * possible.length))
+	}
+
+	return txt
 }
