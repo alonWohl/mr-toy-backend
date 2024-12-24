@@ -2,3 +2,4 @@ node_modules
 logs/backend.log
 .DS_Store
 .vscode
+.env
