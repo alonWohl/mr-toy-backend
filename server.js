@@ -2,12 +2,14 @@ import path, { dirname } from 'path'
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
+import dotenv from 'dotenv'
 
 import { loggerService } from './services/logger.service.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 const app = express()
+dotenv.config()
 
 // Express Config:
 app.use(cookieParser())

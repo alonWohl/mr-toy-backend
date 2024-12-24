@@ -5,7 +5,7 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "nodemon server.js",
-		"server:prod": " export NODE_ENV=production && node server.js"
+		"server:prod": "export NODE_ENV=production && node --env-file=.env server.js"
 	},
 	"type": "module",
 	"keywords": [],
@@ -17,6 +17,7 @@
 		"cookie-parser": "^1.4.7",
 		"cors": "^2.8.5",
 		"cryptr": "^6.3.0",
+		"dotenv": "^16.4.7",
 		"express": "^4.21.1",
 		"mongodb": "^6.12.0"
 	}
