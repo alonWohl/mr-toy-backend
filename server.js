@@ -1,10 +1,15 @@
-import path, { dirname } from 'path'
 import express from 'express'
+
+import { fileURLToPath } from 'url'
+import path, { dirname } from 'path'
+
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import dotenv from 'dotenv'
 
 import { loggerService } from './services/logger.service.js'
+
+import { setupAsyncLocalStorage } from './middlewares/setupAls.middleware.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -28,15 +33,17 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Express Routing:
+app.all('*', setupAsyncLocalStorage)
 
 import { toyRoutes } from './api/toy/toy.routes.js'
 import { authRoutes } from './api/auth/auth.routes.js'
 import { userRoutes } from './api/user/user.routes.js'
-import { fileURLToPath } from 'url'
+import { reviewRoutes } from './api/review/review.routes.js'
 
 app.use('/api/toy', toyRoutes)
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
+app.use('/api/review', reviewRoutes)
 
 // Fallback route
 app.get('/**', (req, res) => {
