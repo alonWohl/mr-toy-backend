@@ -43,12 +43,12 @@ async function query(filterBy = {}) {
 					$project: {
 						_id: 1,
 						txt: '$txt',
-						toy: {
+						aboutToy: {
 							_id: '$toy._id',
 							name: '$toy.name',
 							price: '$toy.price'
 						},
-						user: {
+						byUser: {
 							_id: '$user._id',
 							fullname: '$user.fullname'
 						}
@@ -104,6 +104,10 @@ function _buildCriteria(filterBy) {
 
 	if (filterBy.byUserId) {
 		criteria.byUserId = ObjectId.createFromHexString(filterBy.byUserId)
+	}
+
+	if (filterBy.aboutToyId) {
+		criteria.aboutToyId = ObjectId.createFromHexString(filterBy.aboutToyId)
 	}
 	return criteria
 }

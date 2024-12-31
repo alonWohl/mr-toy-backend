@@ -38,6 +38,7 @@ export async function addReview(req, res) {
 		savedReview.byUser = loggedinUser
 		savedReview.aboutToy = await toyService.getById(aboutToyId)
 
+		delete savedReview.aboutToy.getReviews
 		delete savedReview.aboutToyId
 		delete savedReview.byUserId
 

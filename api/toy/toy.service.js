@@ -1,6 +1,7 @@
 import { ObjectId } from 'mongodb'
 import { loggerService } from '../../services/logger.service.js'
 import { dbService } from '../../services/db.service.js'
+import { reviewService } from '../review/review.service.js'
 
 const PAGE_SIZE = 6
 
@@ -56,6 +57,12 @@ async function getById(toyId) {
 		const collection = await dbService.getCollection('toy')
 		const toy = await collection.findOne({ _id: ObjectId.createFromHexString(toyId) })
 		toy.createdAt = toy._id.getTimestamp()
+
+		toy.givenReviews = await reviewService.query({ aboutToyId: toyId })
+		toy.givenReviews = toy.givenReviews.map(review => {
+			delete review.aboutToy
+			return review
+		})
 		return toy
 	} catch (err) {
 		loggerService.error('cannot find toy')
